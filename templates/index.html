@@ -23,7 +23,7 @@
       },
       yAxis: {
           title: {
-              text: 'Data'
+              text: 'Sensor Reading'
           },
           height: '100%',
           max: 1
@@ -48,48 +48,64 @@
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: ' {point.y}'
+                    pointFormat: 'Sensor Reading:{point.y} <br>Sample Number: {point.options.sample}'
                 },
                 opacity: 0.4
+            },
+            series: {
+                turboThreshold: 4000,
             }
         },
+        
       series: [{
           name: 'Class 1',
-          data: task_data['class1']['sensor0'].map(s => [0, s]).concat(
-                task_data['class1']['sensor1'].map(s => [1, s]),
-                task_data['class1']['sensor2'].map(s => [2, s]),
-                task_data['class1']['sensor3'].map(s => [3, s]),
-                task_data['class1']['sensor4'].map(s => [4, s]),
-                task_data['class1']['sensor5'].map(s => [5, s]),
-                task_data['class1']['sensor6'].map(s => [6, s]),
-                task_data['class1']['sensor7'].map(s => [7, s]),
-                task_data['class1']['sensor8'].map(s => [8, s]),
-                task_data['class1']['sensor9'].map(s => [9, s])
-                )
-          
-          //data: [[0, 0.4],[0, 0.9],[1, 0.3],[1, 0.5],[2, 0.7],[2, 0.8]]
+          data: task_data['class1']['sensor0'].map((s,i) => {return {x:0, y:s, sample:i}}).concat(
+            task_data['class1']['sensor1'].map((s,i) => {return {x:1, y:s, sample:i}}),
+            task_data['class1']['sensor2'].map((s,i) => {return {x:2, y:s, sample:i}}),
+            task_data['class1']['sensor3'].map((s,i) => {return {x:3, y:s, sample:i}}),
+            task_data['class1']['sensor4'].map((s,i) => {return {x:4, y:s, sample:i}}),
+            task_data['class1']['sensor5'].map((s,i) => {return {x:5, y:s, sample:i}}),
+            task_data['class1']['sensor6'].map((s,i) => {return {x:6, y:s, sample:i}}),
+            task_data['class1']['sensor7'].map((s,i) => {return {x:7, y:s, sample:i}}),
+            task_data['class1']['sensor8'].map((s,i) => {return {x:8, y:s, sample:i}}),
+            task_data['class1']['sensor9'].map((s,i) => {return {x:9, y:s, sample:i}})
+          )
       },
       {
           name: 'Class 2',
-          data: task_data['class2']['sensor0'].map(s => [0, s]).concat(
-                task_data['class2']['sensor1'].map(s => [1, s]),
-                task_data['class2']['sensor2'].map(s => [2, s]),
-                task_data['class2']['sensor3'].map(s => [3, s]),
-                task_data['class2']['sensor4'].map(s => [4, s]),
-                task_data['class2']['sensor5'].map(s => [5, s]),
-                task_data['class2']['sensor6'].map(s => [6, s]),
-                task_data['class2']['sensor7'].map(s => [7, s]),
-                task_data['class2']['sensor8'].map(s => [8, s]),
-                task_data['class2']['sensor9'].map(s => [9, s]),
-                )
+          data: task_data['class2']['sensor0'].map((s,i) => {return {x:0, y:s, sample:i}}).concat(
+            task_data['class2']['sensor1'].map((s,i) => {return {x:1, y:s, sample:i}}),
+            task_data['class2']['sensor2'].map((s,i) => {return {x:2, y:s, sample:i}}),
+            task_data['class2']['sensor3'].map((s,i) => {return {x:3, y:s, sample:i}}),
+            task_data['class2']['sensor4'].map((s,i) => {return {x:4, y:s, sample:i}}),
+            task_data['class2']['sensor5'].map((s,i) => {return {x:5, y:s, sample:i}}),
+            task_data['class2']['sensor6'].map((s,i) => {return {x:6, y:s, sample:i}}),
+            task_data['class2']['sensor7'].map((s,i) => {return {x:7, y:s, sample:i}}),
+            task_data['class2']['sensor8'].map((s,i) => {return {x:8, y:s, sample:i}}),
+            task_data['class2']['sensor9'].map((s,i) => {return {x:9, y:s, sample:i}})
+          )
       }
       
       
       ]
   });
+        //console.log(myChart.series[0].data);
+        //console.log(task_data['class1']);
+        //console.log(task_data['class2']);
+        console.log(
 
-        console.log(task_data['class1']);
-        console.log(task_data['class2']);
+            task_data['class1']['sensor1'].map((s,i) => {return {x:0, y:s, sample:i}}).concat(
+            task_data['class1']['sensor1'].map((s,i) => {return {x:1, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:2, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:3, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:4, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:5, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:6, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:7, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:8, y:s, sample:i}}),
+            task_data['class1']['sensor1'].map((s,i) => {return {x:9, y:s, sample:i}})
+          )
+        )
 
 
     })()
