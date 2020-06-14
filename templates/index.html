@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- Your code here ! -->
+<div id="container"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    (async () => {
+        let task_data = await fetch('./data').then(r => r.json());
+
+    var myChart = Highcharts.chart('container', {
+      chart: {
+          type: 'scatter'
+      },
+      title: {
+          text: 'Sensor Readings'
+      },
+      xAxis: {
+          categories: ['Sensor 0','Sensor 1','Sensor 2','Sensor 3','Sensor 4','Sensor 5','Sensor 6','Sensor 7','Sensor 8','Sensor 9']
+      },
+      yAxis: {
+          title: {
+              text: 'Data'
+          },
+          height: '100%',
+          max: 1
+      },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 4,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: ' {point.y}'
+                },
+                opacity: 0.4
+            }
+        },
+      series: [{
+          name: 'Class 1',
+          data: task_data['class1']['sensor0'].map(s => [0, s]).concat(
+                task_data['class1']['sensor1'].map(s => [1, s]),
+                task_data['class1']['sensor2'].map(s => [2, s]),
+                task_data['class1']['sensor3'].map(s => [3, s]),
+                task_data['class1']['sensor4'].map(s => [4, s]),
+                task_data['class1']['sensor5'].map(s => [5, s]),
+                task_data['class1']['sensor6'].map(s => [6, s]),
+                task_data['class1']['sensor7'].map(s => [7, s]),
+                task_data['class1']['sensor8'].map(s => [8, s]),
+                task_data['class1']['sensor9'].map(s => [9, s])
+                )
+          
+          //data: [[0, 0.4],[0, 0.9],[1, 0.3],[1, 0.5],[2, 0.7],[2, 0.8]]
+      },
+      {
+          name: 'Class 2',
+          data: task_data['class2']['sensor0'].map(s => [0, s]).concat(
+                task_data['class2']['sensor1'].map(s => [1, s]),
+                task_data['class2']['sensor2'].map(s => [2, s]),
+                task_data['class2']['sensor3'].map(s => [3, s]),
+                task_data['class2']['sensor4'].map(s => [4, s]),
+                task_data['class2']['sensor5'].map(s => [5, s]),
+                task_data['class2']['sensor6'].map(s => [6, s]),
+                task_data['class2']['sensor7'].map(s => [7, s]),
+                task_data['class2']['sensor8'].map(s => [8, s]),
+                task_data['class2']['sensor9'].map(s => [9, s]),
+                )
+      }
+      
+      
+      ]
+  });
+
+        console.log(task_data['class1']);
+        console.log(task_data['class2']);
+
+
+    })()
+    
+});
+  </script>
+
+
+{% endblock %}
