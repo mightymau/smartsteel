@@ -5019,3 +5019,4 @@ venv/lib/python3.8/site-packages/pip-19.2.3.dist-info/METADATA
 venv/lib/python3.8/site-packages/pip-19.2.3.dist-info/RECORD
 venv/lib/python3.8/site-packages/pip-19.2.3.dist-info/top_level.txt
 venv/lib/python3.8/site-packages/pip-19.2.3.dist-info/WHEEL
+__pycache__/main.cpython-38.pyc
