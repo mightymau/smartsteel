@@ -1,4 +1,4 @@
-Task description
+Task descriptions
 ----------------
 The file task_data.csv contains an example data set that has been artificially
 generated. The set consists of 400 samples where for each sample there are 10
