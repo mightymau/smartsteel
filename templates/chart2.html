@@ -11,12 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
     (async () => {
         task_data = await fetch('./data').then(r => r.json());
 
+
         myChart = Highcharts.chart('container', {
         chart: {
-            type: 'scatter'
+            type: 'line',
         },
         title: {
-            text: 'Sample Data'
+            text: 'Data for each Sample across Sensors'
         },
         xAxis: {
             categories: ['Sensor 0','Sensor 1','Sensor 2','Sensor 3','Sensor 4','Sensor 5','Sensor 6','Sensor 7','Sensor 8','Sensor 9']
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             series: {
                 turboThreshold: 4000,
+            
             }
         },
             
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             marker: {
                 symbol: 'circle',
             },
+            
             data: [{x:0, y:task_data['class1']['sensor0'][0], sample: 'sample'+ 0 },
             {x:1, y:task_data['class1']['sensor1'][0], sample: 'sample'+ 0 },
             {x:2, y:task_data['class1']['sensor2'][0], sample: 'sample'+ 0 },
@@ -141,11 +144,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     symbol: 'circle',
                 },
                 opacity: 1,
+                animation: {
+                    duration: 2000
+                },
                 data: newseries
             }
         if(!myChart.get('sample'+sampleindex))
             myChart.addSeries(seriesdata);
-       // console.log(task_data);
+            myChart.redraw();
         setInterval(function(){console.log("hey")}, 1000)
     }
     

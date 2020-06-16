@@ -17,6 +17,10 @@ def create_app():
     def chart2():
         return flask.render_template('chart2.html')
 
+    @app.route('/sd', methods=['GET', 'POST'])
+    def sd():
+        return flask.render_template('sd.html')
+
     @app.route('/data', methods=['GET', 'POST'])
     def data():
         """

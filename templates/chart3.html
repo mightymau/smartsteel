@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- Your code here ! -->
+<div id="container"></div>
+<div id="reporting"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    (async () => {
+        let task_data = await fetch('./data').then(r => r.json());
+      
+
+        let class1 = task_data['class1']['sample index'].map((s,i) => { 
+                     
+            sampledata = [{x:0, y:task_data['class1']['sensor0'][i], sample:s}].concat(
+                {x:1, y:task_data['class1']['sensor1'][i], sample:s},
+                {x:2, y:task_data['class1']['sensor2'][i], sample:s},
+                {x:3, y:task_data['class1']['sensor3'][i], sample:s},
+                {x:4, y:task_data['class1']['sensor4'][i], sample:s},
+                {x:5, y:task_data['class1']['sensor5'][i], sample:s},
+                {x:6, y:task_data['class1']['sensor6'][i], sample:s},
+                {x:7, y:task_data['class1']['sensor7'][i], sample:s},
+                {x:8, y:task_data['class1']['sensor8'][i], sample:s},
+                {x:9, y:task_data['class1']['sensor9'][i], sample:s},
+
+            ); 
+
+            let seriesdata = { 
+                name: 'Class 1',
+                lineWidth: 1,
+                lineColor: 'blue',
+                marker: {
+                    symbol: 'circle',
+                    fillColor: 'blue',
+                },
+                showInLegend: false,
+                data: sampledata
+            }
+            return seriesdata
+        
+        
+         });
+
+
+         let class2 = task_data['class2']['sample index'].map((s,i) => { 
+                     
+                     sampledata = [{x:0, y:task_data['class2']['sensor0'][i], sample:s}].concat(
+                         {x:1, y:task_data['class2']['sensor1'][i], sample:s},
+                         {x:2, y:task_data['class2']['sensor2'][i], sample:s},
+                         {x:3, y:task_data['class2']['sensor3'][i], sample:s},
+                         {x:4, y:task_data['class2']['sensor4'][i], sample:s},
+                         {x:5, y:task_data['class2']['sensor5'][i], sample:s},
+                         {x:6, y:task_data['class2']['sensor6'][i], sample:s},
+                         {x:7, y:task_data['class2']['sensor7'][i], sample:s},
+                         {x:8, y:task_data['class2']['sensor8'][i], sample:s},
+                         {x:9, y:task_data['class2']['sensor9'][i], sample:s},
+         
+                     ); 
+         
+                     let seriesdata = { 
+                         name: 'Class 2',
+                         lineWidth: 1,
+                         lineColor: 'yellow',
+                         marker: {
+                             symbol: 'circle',
+                             fillColor: 'yellow',
+                         },
+                         showInLegend: false,
+                         data: sampledata
+                     }
+                     return seriesdata
+                 
+                 
+                  });
+
+
+        var myChart = Highcharts.chart('container', {
+            chart:{
+                type:'scatter'
+            },
+            plotOptions: {
+                series: {
+                    point: {
+                        events: {
+                            mouseOver: function () {
+                                this.series.graph.show();
+                            }
+                        }
+                    },
+                    events: {
+                        mouseOut: function () {
+                            this.graph.hide();
+                        }
+                    },
+                    turboThreshold: 4000,
+                }
+            },
+
+            tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: 'Sensor Reading: {point.y} <br>Sample Number: {point.options.sample}'
+            },
+
+            series: 
+            class2.concat(class1)
+        },function(chart){
+    
+            chart.series.forEach(item => {
+                        item.graph.hide();
+                    })
+                
+            }
+        
+        
+        ); }
+    )()
+});
+</script>
+
+
+
+
+{% endblock %}

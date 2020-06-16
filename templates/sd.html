@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- Your code here ! -->
+<div id="container"></div>
+<div id="reporting"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    (async () => {
+        let task_data = await fetch('./data').then(r => r.json());
+      
+
+        let class1StandardDeviations = [standardDeviation(task_data['class1']['sensor0']),
+        standardDeviation(task_data['class1']['sensor1']),
+        standardDeviation(task_data['class1']['sensor2']),
+        standardDeviation(task_data['class1']['sensor3']),
+        standardDeviation(task_data['class1']['sensor4']),
+        standardDeviation(task_data['class1']['sensor5']),
+        standardDeviation(task_data['class1']['sensor6']),
+        standardDeviation(task_data['class1']['sensor7']),
+        standardDeviation(task_data['class1']['sensor8']),
+        standardDeviation(task_data['class1']['sensor9'])]
+
+        let class2StandardDeviations = [standardDeviation(task_data['class2']['sensor0']),
+        standardDeviation(task_data['class2']['sensor1']),
+        standardDeviation(task_data['class2']['sensor2']),
+        standardDeviation(task_data['class2']['sensor3']),
+        standardDeviation(task_data['class2']['sensor4']),
+        standardDeviation(task_data['class2']['sensor5']),
+        standardDeviation(task_data['class2']['sensor6']),
+        standardDeviation(task_data['class2']['sensor7']),
+        standardDeviation(task_data['class2']['sensor8']),
+        standardDeviation(task_data['class2']['sensor9'])]
+
+
+        //console.log(class1StandardDeviations, class2StandardDeviations)
+
+        
+        
+        var myChart = Highcharts.chart('container', {
+            chart:{
+                type:'spline'
+            },
+            title: {
+                text: 'Standard Deviation for each Class'
+            },
+            tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: 'Standard Deviation: {point.y}'
+            },
+            yAxis: {
+                title: {
+                    text: 'Standard Deviation'
+                }
+            },
+            xAxis: {
+                categories: ['Sensor 0','Sensor 1','Sensor 2','Sensor 3','Sensor 4','Sensor 5','Sensor 6','Sensor 7','Sensor 8','Sensor 9']
+        }   ,
+            series: [{ 
+                name: 'Class 1 Standard Deviations',
+                lineWidth: 2,
+                color: 'rgba(255,165,0, 1)',
+                marker: {
+                    symbol: 'circle',
+                },
+                showInLegend: true,
+                data: class1StandardDeviations
+            },{ 
+                name: 'Class 2 Standard Deviations',
+                lineWidth: 2,
+                color: 'rgba(45,80,111,1)',
+                marker: {
+                    symbol: 'circle',
+                },
+                showInLegend: true,
+                data: class2StandardDeviations
+            }],
+        }
+        
+        
+    ); }
+        
+    )()
+});
+</script>
+
+
+
+
+{% endblock %}
