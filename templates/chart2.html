@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="container"></div>
+<script>
+
+let myChart;
+let task_data;
+document.addEventListener('DOMContentLoaded', function () {
+
+    (async () => {
+        task_data = await fetch('./data').then(r => r.json());
+
+        myChart = Highcharts.chart('container', {
+        chart: {
+            type: 'scatter'
+        },
+        title: {
+            text: 'Sample Data'
+        },
+        xAxis: {
+            categories: ['Sensor 0','Sensor 1','Sensor 2','Sensor 3','Sensor 4','Sensor 5','Sensor 6','Sensor 7','Sensor 8','Sensor 9']
+        },
+        yAxis: {
+            title: {
+                text: 'Sensor Reading'
+            },
+            height: '100%',
+            max: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 4,
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: 'Sensor Reading:{point.y}'
+                },
+                opacity: 1
+            },
+            series: {
+                turboThreshold: 4000,
+            }
+        },
+            
+        series: [{
+            id: 'sample0',
+            name: 'Sample 0',
+            lineWidth: 4,
+            marker: {
+                symbol: 'circle',
+            },
+            data: [{x:0, y:task_data['class1']['sensor0'][0], sample: 'sample'+ 0 },
+            {x:1, y:task_data['class1']['sensor1'][0], sample: 'sample'+ 0 },
+            {x:2, y:task_data['class1']['sensor2'][0], sample: 'sample'+ 0 },
+            {x:3, y:task_data['class1']['sensor3'][0], sample: 'sample'+ 0 },
+            {x:4, y:task_data['class1']['sensor4'][0], sample: 'sample'+ 0 },
+            {x:5, y:task_data['class1']['sensor5'][0], sample: 'sample'+ 0 },
+            {x:6, y:task_data['class1']['sensor6'][0], sample: 'sample'+ 0 },
+            {x:7, y:task_data['class1']['sensor7'][0], sample: 'sample'+ 0 },
+            {x:8, y:task_data['class1']['sensor8'][0], sample: 'sample'+ 0 },
+            {x:9, y:task_data['class1']['sensor9'][0], sample: 'sample'+ 0 },
+            
+            ]
+        }
+        
+        
+        
+        ]
+        });
+
+    })()
+
+});
+
+
+</script>
+
+<div>
+    <form name="sensorform">
+        <input type="text" name="sensor_num" placeholder="0-399">
+        <button type="submit" name="submit">Submit</button>
+        <button type="reset" name="clear">Clear</button>
+
+    </form>
+</div>
+<script>
+    document.querySelector("form").addEventListener("reset", function(e){
+        while(myChart.series.length) {
+            myChart.series[0].remove();
+        }
+      console.log("reset")  
+    })
+    document.querySelector("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    console.log(e);
+    if(myChart.get('class-1'))
+        myChart.get('class-1').remove();
+    let sampleindex = e.target['sensor_num'].value;
+    if(sampleindex != null) {
+        let newseries;
+        if(task_data['class1']['sample index'].find(i => i == 'sample'+ sampleindex)) {
+            newseries = [{x:0, y:task_data['class1']['sensor0'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:1, y:task_data['class1']['sensor1'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:2, y:task_data['class1']['sensor2'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:3, y:task_data['class1']['sensor3'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:4, y:task_data['class1']['sensor4'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:5, y:task_data['class1']['sensor5'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:6, y:task_data['class1']['sensor6'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:7, y:task_data['class1']['sensor7'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:8, y:task_data['class1']['sensor8'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:9, y:task_data['class1']['sensor9'][sampleindex], sample: 'sample'+ sampleindex },
+            
+            ]
+            
+        } else if (task_data['class2']['sample index'].find(i => i == 'sample'+ sampleindex)) {
+
+            newseries = [{x:0, y:task_data['class2']['sensor0'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:1, y:task_data['class2']['sensor1'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:2, y:task_data['class2']['sensor2'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:3, y:task_data['class2']['sensor3'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:4, y:task_data['class2']['sensor4'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:5, y:task_data['class2']['sensor5'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:6, y:task_data['class2']['sensor6'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:7, y:task_data['class2']['sensor7'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:8, y:task_data['class2']['sensor8'][sampleindex], sample: 'sample'+ sampleindex },
+            {x:9, y:task_data['class2']['sensor9'][sampleindex], sample: 'sample'+ sampleindex },
+            
+            ]
+            
+        } else {
+            return;
+        }
+        //myChart.get('class-1').remove();
+        let seriesdata = { 
+                name: 'Sample '+ sampleindex,
+                id: 'sample'+sampleindex,
+                lineWidth: 4,
+                marker: {
+                    symbol: 'circle',
+                },
+                opacity: 1,
+                data: newseries
+            }
+        if(!myChart.get('sample'+sampleindex))
+            myChart.addSeries(seriesdata);
+       // console.log(task_data);
+        setInterval(function(){console.log("hey")}, 1000)
+    }
+    
+});
+
+
+</script>
+{% endblock %}

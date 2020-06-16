@@ -13,6 +13,10 @@ def create_app():
         """
         return flask.render_template('index.html')
 
+    @app.route('/chart2', methods=['GET', 'POST'])
+    def chart2():
+        return flask.render_template('chart2.html')
+
     @app.route('/data', methods=['GET', 'POST'])
     def data():
         """
