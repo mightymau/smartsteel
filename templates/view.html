@@ -2,13 +2,13 @@
 {% block content %}
 <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link" href="/">Graph 1 - <em>Scatter Plot</em></a>
+      <a class="nav-link" href="/">Chart 1 - <em>Scatter Plot</em></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/sd">Graph 2 - <em>Standard Deviation</em></a>
+      <a class="nav-link" href="/sd">Chart 2 - <em>Standard Deviation</em></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="/chart2">Graph 3 - <em>Individual Sample Data</em></a>
+      <a class="nav-link active" href="/view">Chart 3 - <em>Individual Sample Data</em></a>
     </li>
 </ul>
 <div id="graphcontainer"></div>
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="row no-gutters">
         <div class="col-8">
         <h2>View & Compare Individual Sample Data</h2>
-        <p>For this third graph(initialy loaded with data from 'sample0'), I wanted to be able to access data points from each sample. Users can input sample ID on the form and it will plot a single sample data accross each sensor using a line graph to show how it varies from different sensors. This graph can also compare different sample data by inputing multiple ID's. This can be useful if the user needs to examine individual sample or compare multiple samples.</p>
+        <p>For this third chart(initialy loaded with data from 'sample0'), I wanted to be able to access data points from each sample. Users can input sample ID on the form and it will plot a single sample data accross each sensor using a line chart to show how it varies from different sensors. This chart can also compare different sample data by inputing multiple ID's. This can be useful if the user needs to examine individual sample or compare multiple samples.</p>
         </div>
         <div class="col-4">
             <form name="sensorform">
@@ -113,11 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
         while(myChart.series.length) {
             myChart.series[0].remove();
         }
-      console.log("reset")  
     })
     document.querySelector("form").addEventListener("submit", function(e){
     e.preventDefault();
-    console.log(e);
     if(myChart.get('class-1'))
         myChart.get('class-1').remove();
     let sampleindex = e.target['sensor_num'].value;
@@ -138,17 +136,17 @@ document.addEventListener('DOMContentLoaded', function () {
             ]
             
         } else if (task_data['class2']['sample index'].find(i => i == 'sample'+ sampleindex)) {
-
-            newseries = [{x:0, y:task_data['class2']['sensor0'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:1, y:task_data['class2']['sensor1'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:2, y:task_data['class2']['sensor2'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:3, y:task_data['class2']['sensor3'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:4, y:task_data['class2']['sensor4'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:5, y:task_data['class2']['sensor5'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:6, y:task_data['class2']['sensor6'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:7, y:task_data['class2']['sensor7'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:8, y:task_data['class2']['sensor8'][sampleindex], sample: 'sample'+ sampleindex },
-            {x:9, y:task_data['class2']['sensor9'][sampleindex], sample: 'sample'+ sampleindex },
+           
+            newseries = [{x:0, y:task_data['class2']['sensor0'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:1, y:task_data['class2']['sensor1'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:2, y:task_data['class2']['sensor2'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:3, y:task_data['class2']['sensor3'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:4, y:task_data['class2']['sensor4'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:5, y:task_data['class2']['sensor5'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:6, y:task_data['class2']['sensor6'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:7, y:task_data['class2']['sensor7'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:8, y:task_data['class2']['sensor8'][sampleindex-200], sample: 'sample'+ sampleindex },
+            {x:9, y:task_data['class2']['sensor9'][sampleindex-200], sample: 'sample'+ sampleindex },
             
             ]
             
@@ -172,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(!myChart.get('sample'+sampleindex))
             myChart.addSeries(seriesdata);
             myChart.redraw();
-        setInterval(function(){console.log("hey")}, 1000)
+
     }
     
 });
