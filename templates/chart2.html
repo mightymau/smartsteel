@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Graph 1 - <em>Scatter Plot</em></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/sd">Graph 2 - <em>Standard Deviation</em></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/chart2">Graph 3 - <em>Individual Sample Data</em></a>
+    </li>
+</ul>
+<div id="graphcontainer"></div>
 
-<div id="container"></div>
 <script>
 
 let myChart;
@@ -12,12 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
         task_data = await fetch('./data').then(r => r.json());
 
 
-        myChart = Highcharts.chart('container', {
+        myChart = Highcharts.chart('graphcontainer', {
         chart: {
             type: 'line',
         },
         title: {
-            text: 'Data for each Sample across Sensors'
+            text: 'View & Compare Individual Sample Data'
         },
         xAxis: {
             categories: ['Sensor 0','Sensor 1','Sensor 2','Sensor 3','Sensor 4','Sensor 5','Sensor 6','Sensor 7','Sensor 8','Sensor 9']
@@ -49,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         series: [{
             id: 'sample0',
             name: 'Sample 0',
-            lineWidth: 4,
+            lineWidth: 2,
             marker: {
                 symbol: 'circle',
             },
@@ -80,13 +91,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </script>
 
-<div>
-    <form name="sensorform">
-        <input type="text" name="sensor_num" placeholder="0-399">
-        <button type="submit" name="submit">Submit</button>
-        <button type="reset" name="clear">Clear</button>
-
-    </form>
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-8">
+        <h2>View & Compare Individual Sample Data</h2>
+        <p>For this third graph(initialy loaded with data from 'sample0'), I wanted to be able to access data points from each sample. Users can input sample ID on the form and it will plot a single sample data accross each sensor using a line graph to show how it varies from different sensors. This graph can also compare different sample data by inputing multiple ID's. This can be useful if the user needs to examine individual sample or compare multiple samples.</p>
+        </div>
+        <div class="col-4">
+            <form name="sensorform">
+                <label for="sensor_num">Input Sample Id</label><br>
+                <input type="text" name="sensor_num" placeholder="0-399">
+                <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                <button class="btn btn-dark" type="reset" name="clear">Clear</button>
+        
+            </form>
+        </div>
+    </div>
 </div>
 <script>
     document.querySelector("form").addEventListener("reset", function(e){
@@ -139,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let seriesdata = { 
                 name: 'Sample '+ sampleindex,
                 id: 'sample'+sampleindex,
-                lineWidth: 4,
+                lineWidth: 2,
                 marker: {
                     symbol: 'circle',
                 },

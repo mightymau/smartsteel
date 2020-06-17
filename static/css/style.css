@@ -1,8 +1,85 @@
 * {
     margin: 0;
 }
-
-#container {
-    height: 70vh;
+body {
+    font-family: 'Roboto', sans-serif;
+}
+main {
     width: 80vw;
+    margin: 50px auto;
+}
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    color: rgb(45,80,111);
+}
+h2 {
+    padding-top: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+h6 {
+    padding-bottom: 30px;
+    color: gray;
+
+}
+p {
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
+}
+label {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+#graphcontainer {
+    width: 80vw;
+    padding-top: 30px;
+    border: 2px solid black;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: chocolate!important;
+    color: #fff!important;
+}
+.nav-tabs .nav-link.active > em {
+    color: #fff!important;
+    font-weight: bold;
+}
+.nav-tabs .nav-link {
+    color: black!important;
+}
+.container-fluid {
+    padding-left: 0;
+    margin-left: 0;
+    padding-right: 0;
+}
+.col-4{
+    padding-top:30px;
+}
+.btn {
+    margin-top:0;
+}
+.btn-primary {
+    background-color: #f26d13;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.btn-primary:hover {
+    background-color: #ab4c0c;
+}
+.btn-dark {
+    border: none;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+input {
+    height: 35px;
+}
+form {
+    vertical-align: center;
+
+}
+em {
+    color: gray;
 }

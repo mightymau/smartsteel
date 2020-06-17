@@ -3,18 +3,36 @@
 
 
 <!-- Your code here ! -->
-<div id="container"></div>
-<div id="reporting"></div>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="/">Graph 1 - <em>Scatter Plot</em></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/sd">Graph 2 - <em>Standard Deviation</em></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/chart2">Graph 3 - <em>Individual Sample Data</em></a>
+    </li>
+</ul>
+<div id="graphcontainer"></div>
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-8">
+        <h2>All Task data categorized by Class label</h2>
+        <p>Using scatter graph, I wanted to plot all data points categorized by class label. With this graph, it is easy to identify and visualize if there is clustering of data. On the first glance, Sensor 6 seems to have two clusters from Class 1 samples. Upon further examination, we can also see that there are two clusters from Class 2 samples for Sensor 2. </p>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
 
 (async () => {
     let task_data = await fetch('./data').then(r => r.json());
 
-
-
-
-    Highcharts.chart('container', {
+    Highcharts.chart('graphcontainer', {
         chart: {
             type: 'scatter'
         },

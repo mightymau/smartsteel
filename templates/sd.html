@@ -3,8 +3,28 @@
 
 
 <!-- Your code here ! -->
-<div id="container"></div>
-<div id="reporting"></div>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Graph 1 - <em>Scatter Plot</em></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/sd">Graph 2 - <em>Standard Deviation</em></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/chart2">Graph 3 - <em>Individual Sample Data</em></a>
+    </li>
+</ul>
+<div id="graphcontainer"></div>
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-8">
+        <h2>Standard Deviation categorized by Class label</h2>
+        <p>To identify if there is consistency on the sensor data, I used Standard Deviation for each Sensor categorized by class. From the provided CSV file we can easily see that ,except for sensors 2 and 6, all data points seems to have the same variation. This indicates that there is consistency on these sensors.</p>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -39,12 +59,12 @@
 
         
         
-        var myChart = Highcharts.chart('container', {
+        var myChart = Highcharts.chart('graphcontainer', {
             chart:{
                 type:'spline'
             },
             title: {
-                text: 'Standard Deviation for each Class'
+                text: 'Standard Deviation categorized by Class label'
             },
             tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
